@@ -1,0 +1,24 @@
+<h2 *ngIf="products; else noProduct" style="text-align: center;">{{ title }}</h2>
+<ng-template #noProduct>
+  <div class="alert alert-danger" role="alert">Bu kategoride ürün yoktur</div>
+</ng-template>
+<div class="input-group flex-nowrap">
+  <span class="input-group-text" >Ara</span>
+  <input [(ngModel)]="filterText" type="text" class="form-control" placeholder="Aramak istediğiniz kripto para birimini yazınız"  aria-describedby="addon-wrapping">
+  
+</div>
+<div  *ngIf="products" class="row">
+  <div
+    *ngFor="let product of products.data | productFilter:filterText"
+    class="card; col-md-4"
+    style="width: 18rem"
+  >
+    <!-- <img src="..." class="card-img-top" alt="..."> -->
+    <div class="card-body">
+      <h5 class="card-title">{{ product.name }}</h5>
+      <p class="card-text">{{ product.price_usd | currency:'USD'}}</p>
+      <p class="card-text">24 saatlik işlem hacmi: {{product.volume24}} </p>
+      <a href="#" class="btn btn-primary">Sepete ekle</a>
+    </div>
+  </div>
+</div>
